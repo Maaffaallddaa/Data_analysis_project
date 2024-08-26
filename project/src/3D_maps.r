@@ -93,15 +93,14 @@ num_colors_cn <- length(data_cn$contlabel)
 palette_cn <- color_palette_cn(num_colors_cn)
 
 #Density data for Triturus carnifex
- sf_points_mn <- data.frame(
+sf_points_mn <- data.frame(
     lat = matrix_full_sp2$latitude,
     lon = matrix_full_sp2$longitude
   ) |>
     st_as_sf(coords = c("lon", "lat"), crs = 4326)
-#plot(sf_points_mn)
+#plot(sf_points_mn) just to verify if all the points are present 
 
-skde2 <- st_kde(sf_points_cn, gridsize = c(100, 100))
-#plot(skde2)
+skde2 <- st_kde(sf_points_mn, gridsize = c(100, 100))
 data_mn = st_get_contour(skde2, cont = c(seq(1, 99, 5)), disjoint = FALSE)
 
 # Create a function to generate the color palette
@@ -132,12 +131,16 @@ elmat %>%
 plot_3d(elmat, zscale = 150, fov = 0, theta = 135, zoom = 0.75, 
         phi = 45, windowsize = c(1500, 800))
 
+#The 3D density plot shows that the density of the Great crested Newt is concentrated in Swiizuerland
+#and Marbled Newt in Italy
+#Same results as in the first graph (PART1)
+#Marbled Newt is slightly present in the southern parts of Switzerland (blueish density so low)
+
 # Render points on the 3D elevation map
 render_points(
-  extent = extent(Swi_ita), size = 5,
+  extent = extent(Swi_ita), size = 5, #extent (elmat) does not work
   lat = matrix_full$latitude, long = matrix_full$longitude,
   altitude = elevation_points + 100, zscale = 150, color = "black"
 )
-
-
+#too many points so the result is botched
 ################################################################################

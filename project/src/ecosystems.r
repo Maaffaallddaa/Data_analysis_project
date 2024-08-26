@@ -42,7 +42,8 @@ p2<-ggplot(matrix_full,aes(x=Climate_Re,fill=species))+
     geom_bar(position="dodge")+
     labs(title="Count of Observations of Each Species by Climate",
         x="Climate",y="Count of observations")+
-    theme_minimal()
+    theme_minimal() +
+    scale_fill_manual(values = c("Triturus cristatus" = "darkred", "Triturus carnifex" = "lightblue"))
 
 print(p2)
 #We can see that Triturus carnifex is more found in warm temperate moist, 

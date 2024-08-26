@@ -1,6 +1,7 @@
 ###DATA ANALYSIS PROJECT###
 #PART1 : import data for both species
 
+###############################################################################
 # Load required libraries
 library(rgbif)         # For accessing GBIF occurrence data
 library(rnaturalearth) # For obtaining spatial data
@@ -43,18 +44,20 @@ species <- occur1_CH$species
 latitude <- occur1_CH$decimalLatitude
 longitude <- occur1_CH$decimalLongitude
 source <- rep("gbif", length(species)) #create a column for the data source
+country <- rep("Switzerland", length(species)) #create a column for the country
 
 # Create a data frame for CNN in Switzerland
-dataCN_CH <- data.frame(species, latitude, longitude, source)
+dataCN_CH <- data.frame(species, country, latitude, longitude, source)
 
 # Extract relevant data from GBIF occurrences ITALY
 species <- occur1_IT$species
 latitude <- occur1_IT$decimalLatitude
 longitude <- occur1_IT$decimalLongitude
 source <- rep("gbif", length(species))
+country <- rep("Italy", length(species))
 
 # Create a data frame for CN in Italy
-dataCN_IT <- data.frame(species, latitude, longitude, source)
+dataCN_IT <- data.frame(species, country, latitude, longitude, source)
 
 #MATRIX FULL CN in Switzeralnd + Italy
 matrix_full_CN <- rbind(dataCN_CH, dataCN_IT)
@@ -86,18 +89,20 @@ species <- occur2_CH$species
 latitude <- occur2_CH$decimalLatitude
 longitude <- occur2_CH$decimalLongitude
 source <- rep("gbif", length(species)) #create a column for the data source
+country <- rep("Switzerland", length(species))
 
 # Create a data frame for MN in Switzerland
-dataMN_CH <- data.frame(species, latitude, longitude, source)
+dataMN_CH <- data.frame(species, country, latitude, longitude, source)
 
 # Extract relevant data from GBIF occurrences ITALY
 species <- occur2_IT$species
 latitude <- occur2_IT$decimalLatitude
 longitude <- occur2_IT$decimalLongitude
 source <- rep("gbif", length(species))
+country <- rep("Italy", length(species))
 
 # Create a data frame for MN in Italy
-dataMN_IT <- data.frame(species, latitude, longitude, source)
+dataMN_IT <- data.frame(species, country, latitude, longitude, source)
 
 #MATRIX FULL CN in Switzeralnd + Italy
 matrix_full_MN <- rbind(dataMN_CH, dataMN_IT)
@@ -113,7 +118,7 @@ p <- ggplot(data = Swiss_Italy) +
   geom_point(data = matrix_full, aes(x = longitude, y = latitude, fill = species), size = 1.5, 
              shape = 23) +
   theme_classic() +
-  coord_sf(xlim = c(5, 12), ylim = c(44, 50)) 
+  coord_sf(xlim = c(5, 17), ylim = c(38, 49)) 
 
 print(p)
 

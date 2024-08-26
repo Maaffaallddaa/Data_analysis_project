@@ -2,7 +2,7 @@
 ###################### DATA ANALYSIS PERSONAL PROJECT ##############################
 ####################################################################################
 
-#project: triton crêté (triturus cristatus) et triton méridional (triturus carnifex)
+#project: Great crested Newt (Triturus cristatus) and Marbled Newt (Triturus carnifex)
 
 ####################################################################################
 
@@ -20,17 +20,17 @@ source("src/ecosystems.r")
 
 #PART5: add satellite data to the matrix
 source("./src/NDVI.r")
-##METTRE TIFF ITALY CORRECT
 
 #PART6: distribution and density maps in 3D
 source("src/3D_maps.r")
-#PALETTE DENSITY POUR LES DEUX ESPECES
 
-#PART8:
-source("src/plots.r")
+#PART7: PCA and heatmap analysis
+source("src/multivariate_plot.r")
 
-#PART9:
+#PART8: statistic analysis :: correlation and ANOVA test
 source("src/stat.R")
 
-#LIEN GITHUB
+#PART9: random forest
+source("src/machine_learning.r")
+
 ####################################################################################

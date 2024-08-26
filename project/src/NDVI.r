@@ -22,75 +22,75 @@ library(terra)
 library(MODIStsp)
 
 ###############################################################################
-# TIFF for Switzerland
-mapCH_boundary <- geoboundaries("switzerland")
-dir.create("./data/modis", recursive = TRUE)
+## TIFF for Switzerland
+#mapCH_boundary <- geoboundaries("switzerland")
+#dir.create("./data/modis", recursive = TRUE)
 
 # Defining filepath to save downloaded spatial file
-spatial_filepath <- "./data/modis/switzerland.shp"
+#spatial_filepath <- "./data/modis/switzerland.shp"
 
 # Saving downloaded spatial file on to our computer
-st_write(mapCH_boundary, paste0(spatial_filepath))
+#st_write(mapCH_boundary, paste0(spatial_filepath))
 
 
 #### check available data
-MODIStsp_get_prodlayers("M*D13Q1")
+#MODIStsp_get_prodlayers("M*D13Q1")
 
-MODIStsp(
-  gui = FALSE,
-  out_folder = "./data/modis",
-  out_folder_mod = "./data/modis",
-  selprod = "Vegetation Indexes_16Days_250m (M*D13Q1)",
-  bandsel = "NDVI",
-  user = "mstp_test",
-  password = "MSTP_test_01",
-  start_date = "2020.06.01",
-  end_date = "2020.06.01",
-  verbose = FALSE,
-  spatmeth = "file",
-  spafile = spatial_filepath,
-  out_format = "GTiff"
-)
+#MODIStsp(
+  #gui = FALSE,
+  #out_folder = "./data/modis",
+  #out_folder_mod = "./data/modis",
+  #selprod = "Vegetation Indexes_16Days_250m (M*D13Q1)",
+  #bandsel = "NDVI",
+  #user = "mstp_test",
+  #password = "MSTP_test_01",
+  #start_date = "2020.06.01",
+  #end_date = "2020.06.01",
+  #verbose = FALSE,
+  #spatmeth = "file",
+  #spafile = spatial_filepath,
+  #out_format = "GTiff"
+#)
 
 # Downloading the boundary of switzerland
-mapCH_boundary <- geoboundaries("switzerland")
+#mapCH_boundary <- geoboundaries("switzerland")
 
 ###############################################################################
-# TIFF for Italy
-mapIT_boundary <- geoboundaries("Italy")
+## TIFF for Italy : COULD NOT BE DOWNLOADED!!
+#mapIT_boundary <- geoboundaries("Italy")
 
 # Defining filepath to save downloaded spatial file
-spatial_filepath <- "./data/modis/italy.shp"
+#spatial_filepath <- "./data/modis/italy.shp"
 
 # Saving downloaded spatial file on to our computer
-st_write(mapIT_boundary, paste0(spatial_filepath))
+#st_write(mapIT_boundary, paste0(spatial_filepath))
 
 #### check available data
-MODIStsp_get_prodlayers("M*D13Q1")
+#MODIStsp_get_prodlayers("M*D13Q1")
 
-MODIStsp(
-  gui = FALSE,
-  out_folder = "./data/modis",
-  out_folder_mod = "./data/modis",
-  selprod = "Vegetation Indexes_16Days_250m (M*D13Q1)",
-  bandsel = "NDVI",
-  user = "mstp_test",
-  password = "MSTP_test_01",
-  start_date = "2020.06.01",
-  end_date = "2020.06.01",
-  verbose = FALSE,
-  spatmeth = "file",
-  spafile = spatial_filepath,
-  out_format = "GTiff"
-)
+#MODIStsp(
+  #gui = FALSE,
+  #out_folder = "./data/modis",
+  #out_folder_mod = "./data/modis",
+  #selprod = "Vegetation Indexes_16Days_250m (M*D13Q1)",
+  #bandsel = "NDVI",
+  #user = "mstp_test",
+  #password = "MSTP_test_01",
+  #start_date = "2020.06.01",
+  #end_date = "2020.06.01",
+  #verbose = FALSE,
+  #spatmeth = "file",
+  #spafile = spatial_filepath,
+  #out_format = "GTiff"
+#)
 
 # Downloading the boundary of Italy
-mapIT_boundary <- geoboundaries("italy")
+#mapIT_boundary <- geoboundaries("italy")
 
 ###############################################################################
 # Reading in the downloaded NDVI raster data of Switzerland and Italy
 NDVICH_raster <- raster("./data/MYD13Q1_NDVI_2020_153.tif")
-NDVIIT_raster <- raster("./data/MYD13Q1_NDVI_2020_153.tif") #METTRE TIFF ITALY
+NDVIIT_raster <- raster("./data/MYD13Q1_NDVI_2020_153.tif") #TIFF ITALY MISSING
 
 #merging the two rasters
 NDVI_raster <- merge(NDVICH_raster, NDVIIT_raster)
@@ -113,5 +113,6 @@ plot(spatial_points,add=T)
 # Extract NDVI values
 NDVI <- raster::extract(NDVI_raster, spatial_points)
 
-#add the NDVI vallues to the matrix_full
-matrix_full <- data.frame(matrix_full,NDVI)
+#creation of the new matrix_full with the NDVI  values, but without the Italy tiff the data is not complete
+#NDVI values will not be used in the analysis
+#matrix_full <- data.frame(matrix_full,NDVI)
